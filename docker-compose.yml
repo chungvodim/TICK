@@ -19,6 +19,8 @@ services:
       - "8082:8082"
       # UDP Port
       - "8089:8089/udp"
+    networks:
+      - infra-network
 
   telegraf:
     # Full tag list: https://hub.docker.com/r/library/telegraf/tags/
@@ -31,8 +33,10 @@ services:
     environment:
       HOSTNAME: "telegraf-getting-started"
     # Telegraf requires network access to InfluxDB
-    links:
-      - influxdb
+    # links:
+    #   - influxdb
+    networks:
+      - infra-network
     volumes:
       # Mount for telegraf configuration
       - ./telegraf/:/etc/telegraf/
@@ -55,8 +59,10 @@ services:
       # Mount for kapacitor configuration
       - ./kapacitor/config/:/etc/kapacitor/
     # Kapacitor requires network access to Influxdb
-    links:
-      - influxdb
+    # links:
+    #   - influxdb
+    networks:
+      - infra-network
     ports:
       # The API for Kapacitor is served on port 9092
       - "9092:9092"
@@ -74,10 +80,12 @@ services:
     volumes:
       # Mount for chronograf database
       - ./chronograf/data/:/var/lib/chronograf/
-    links:
-      # Chronograf requires network access to InfluxDB and Kapacitor
-      - influxdb
-      - kapacitor
+    # links:
+    #   # Chronograf requires network access to InfluxDB and Kapacitor
+    #   - influxdb
+    #   - kapacitor
+    networks:
+      - infra-network
     ports:
       # The WebUI for Chronograf is served on port 8888
       - "8088:8888"
@@ -91,3 +99,7 @@ services:
       context: ./documentation
     ports:
       - "3010:3000"
+
+networks:
+  infra-network:
+    external: true
