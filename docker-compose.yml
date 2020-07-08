@@ -16,7 +16,7 @@ services:
     ports:
       # The API for InfluxDB is served on port 8086
       - "8086:8086"
-      - "8082:8082"
+      # - "8082:8082"
       # UDP Port
       - "8089:8089/udp"
     networks:
