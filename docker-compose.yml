@@ -77,6 +77,10 @@ services:
     image: "chrono_config"
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
+      # AUTH0_DOMAIN  : "hls.au.auth0.com"
+      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+      # PUBLIC_URL : "http://localhost:8088"
     volumes:
       # Mount for chronograf database
       - ./chronograf/data/:/var/lib/chronograf/
