@@ -1,6 +1,7 @@
 version: '3'
 services:
   influxdb:
+    container_name: influxdb
     # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
     build:
       context: ./images/influxdb/
@@ -23,6 +24,7 @@ services:
       - infra-network
 
   telegraf:
+    container_name: telegraf
     # Full tag list: https://hub.docker.com/r/library/telegraf/tags/
     build:
       context: ./images/telegraf/
@@ -46,6 +48,7 @@ services:
       - influxdb
 
   kapacitor:
+    container_name: kapacitor
   # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
     build:
       context: ./images/kapacitor/
@@ -68,6 +71,7 @@ services:
       - "9092:9092"
 
   chronograf:
+    container_name: chronograf
     # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
     build:
       context: ./images/chronograf
@@ -77,10 +81,13 @@ services:
     image: "chrono_config"
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
+      PUBLIC_URL : "http://localhost:8088"
+      TOKEN_SECRET : "Super5uperUdn3verGu355!"
+      GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
+      GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
       # AUTH0_DOMAIN  : "hls.au.auth0.com"
       # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
       # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
-      # PUBLIC_URL : "http://localhost:8088"
     volumes:
       # Mount for chronograf database
       - ./chronograf/data/:/var/lib/chronograf/
@@ -98,11 +105,11 @@ services:
       - influxdb
       - telegraf
 
-  documentation:
-    build:
-      context: ./documentation
-    ports:
-      - "3010:3000"
+  # documentation:
+  #   build:
+  #     context: ./documentation
+  #   ports:
+  #     - "3010:3000"
 
 networks:
   infra-network:
