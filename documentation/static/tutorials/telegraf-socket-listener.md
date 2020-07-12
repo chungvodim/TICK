@@ -65,7 +65,7 @@ On Linux or WSL you can substitute `-q` for `-w 1`, which tells `nc` to quit onc
 
 Telegraf has the ability to aggregate and process data it receives before sending it on using an output plugin. In the Sandbox, Telegraf is configured with a five second "flush" interval, which means that Telegraf will collect measurements for five seconds, aggregate them, and send the resulting value to InfluxDB. Since we have not specified the type of aggregation we'd like, Telegraf will default to computing the mean of the measurements received during the interval.
 
-Now that we've sent some measurements to Telegraf, let's verify that they made their way into the InfluxDB database. Open Chronograf at [http://localhost:8888](http://localhost:8888) and navigate to the data explorer.
+Now that we've sent some measurements to Telegraf, let's verify that they made their way into the InfluxDB database. Open Chronograf at [http://localhost:8088](http://localhost:8088) and navigate to the data explorer.
 
 Select the `telegraf.autogen` database, then the `my_measurement` field. You should see a graph with some values!
 

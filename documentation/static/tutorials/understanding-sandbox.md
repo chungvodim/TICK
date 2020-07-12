@@ -70,7 +70,7 @@ _internal  monitor          queryExecutor                       146
 
 ### Chronograf
 
-In the `sandbox` Chronograf acts as the control hub for the different products. It can query data from and perform management function for InfluxDB and create tasks on Kapacitor. The Chronograf web interface is available at `http://localhost:8888`.
+In the `sandbox` Chronograf acts as the control hub for the different products. It can query data from and perform management function for InfluxDB and create tasks on Kapacitor. The Chronograf web interface is available at `http://localhost:8088`.
 
 ### Telegraf
 
