@@ -81,7 +81,7 @@ services:
     image: "chrono_config"
     environment:
       RESOURCES_PATH: "/usr/share/chronograf/resources"
-      # PUBLIC_URL : "http://localhost:8088"
+      # PUBLIC_URL : "http://localhost:8888"
       # TOKEN_SECRET : "Super5uperUdn3verGu355!"
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
@@ -99,7 +99,7 @@ services:
       - infra-network
     ports:
       # The WebUI for Chronograf is served on port 8888
-      - "8088:8888"
+      - "8888:8888"
     depends_on:
       - kapacitor
       - influxdb
@@ -110,6 +110,18 @@ services:
   #     context: ./documentation
   #   ports:
   #     - "3010:3000"
+
+  loudml:
+    image: loudml/loudml:latest-devel
+    volumes:
+      - ./loudml/var/lib:/var/lib/loudml
+      - ./loudml/etc/config.yml:/etc/loudml/config.yml:ro
+      - ./loudml/etc/model.json:/etc/loudml/model.json:ro
+      - var_loudml
+    ports:
+      - "8077:8077"
+    depends_on:
+      - influxdb
 
 networks:
   infra-network:

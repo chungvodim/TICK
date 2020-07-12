@@ -86,9 +86,9 @@ sandbox () {
       sleep 3
       if [ $(uname) == "Darwin" ]; then
         open http://localhost:3010
-        open http://localhost:8088
+        open http://localhost:8888
       elif [ $(uname) == "Linux" ]; then
-        xdg-open http://localhost:8088
+        xdg-open http://localhost:8888
         xdg-open http://localhost:3010
       else
         echo "no browser detected..."
