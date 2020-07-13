@@ -1,8 +1,9 @@
-datasources:
+buckets:
   - name: telegraf
     type: influxdb
-    addr: 172.18.0.86:8086
+    addr: influxdb:8086
     database: telegraf
+    measurement: loudml
 
 storage:
   path: /var/lib/loudml

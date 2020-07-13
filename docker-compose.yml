@@ -73,25 +73,26 @@ services:
   chronograf:
     container_name: chronograf
     # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
-    build:
-      context: ./images/chronograf
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        CHRONOGRAF_TAG: ${CHRONOGRAF_TAG}
-    image: "chrono_config"
-    environment:
-      RESOURCES_PATH: "/usr/share/chronograf/resources"
-      # PUBLIC_URL : "http://localhost:8088"
-      # TOKEN_SECRET : "Super5uperUdn3verGu355!"
-      # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
-      # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
-      # AUTH0_DOMAIN  : "hls.au.auth0.com"
-      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
-      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+    # build:
+    #   context: ./images/chronograf
+    #   dockerfile: ./${TYPE}/Dockerfile
+    #   args:
+    #     CHRONOGRAF_TAG: ${CHRONOGRAF_TAG}
+    # image: "chrono_config"
+    image: loudml/chronograf
     # environment:
-    #   INFLUXDB_URL: http://influxdb:8086
-    #   LOUDML_URL: http://loudml:8077
-    #   KAPACITOR_URL: http://kapacitor:9092
+    #   RESOURCES_PATH: "/usr/share/chronograf/resources"
+    #   # PUBLIC_URL : "http://localhost:8088"
+    #   # TOKEN_SECRET : "Super5uperUdn3verGu355!"
+    #   # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
+    #   # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
+    #   # AUTH0_DOMAIN  : "hls.au.auth0.com"
+    #   # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+    #   # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+    environment:
+      INFLUXDB_URL: http://influxdb:8086
+      LOUDML_URL: http://loudml:8077
+      KAPACITOR_URL: http://kapacitor:9092
     volumes:
       # Mount for chronograf database
       - ./chronograf/data/:/var/lib/chronograf/
