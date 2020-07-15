@@ -72,34 +72,36 @@ services:
 
   chronograf:
     container_name: chronograf
-    # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
-    build:
-      context: ./images/chronograf
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        CHRONOGRAF_TAG: ${CHRONOGRAF_TAG}
-    image: "chrono_config"
-    # image: loudml/chronograf
+    # # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
+    # build:
+    #   context: ./images/chronograf
+    #   dockerfile: ./${TYPE}/Dockerfile
+    #   args:
+    #     CHRONOGRAF_TAG: ${CHRONOGRAF_TAG}
+    # image: "chrono_config"
+    image: loudml/chronograf
     environment:
-      RESOURCES_PATH: "/usr/share/chronograf/resources"
-      # PUBLIC_URL : "http://localhost:8088"
-      # TOKEN_SECRET : "Super5uperUdn3verGu355!"
+      # RESOURCES_PATH: "/usr/share/chronograf/resources"
+
+      PUBLIC_URL : "http://localhost:8088"
+      TOKEN_SECRET : "Super5uperUdn3verGu355!"
+
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
-      # AUTH0_DOMAIN  : "hls.au.auth0.com"
-      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
-      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
 
-      # GENERIC_CLIENT_ID: "chronograf"
+      AUTH0_DOMAIN  : "hls.au.auth0.com"
+      AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+      AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+
+      # GENERIC_CLIENT_ID: "coursepad.admin"
       # GENERIC_CLIENT_SECRET: "IEvgIBADANLgkqhkiG9w0BAQEFAASCB"
-      # GENERIC_AUTH_URL: "https://localhost:44300/connect/authorize"
-      # GENERIC_TOKEN_URL: "https://localhost:44300/connect/token"
+      # GENERIC_AUTH_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/authorize"
+      # GENERIC_TOKEN_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/token"
       # USE_ID_TOKEN: "true"
-      # JWKS_URL: "https://localhost:44300/.well-known/openid-configuration"
-      # GENERIC_API_URL: "https://localhost:44300/connect/userinfo"
+      # JWKS_URL: "https://systemtest-idm-web.csc.cxs.cloud/.well-known/openid-configuration"
+      # GENERIC_API_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/userinfo"
       # GENERIC_API_KEY: "upn"
       # GENERIC_SCOPES: "openid"
-      # TOKEN_SECRET: "IEvgIBADANLgkqhkiG9w0BAQEFAASCB"
 
     # environment:
     #   INFLUXDB_URL: http://influxdb:8086
