@@ -89,9 +89,9 @@ services:
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
 
-      AUTH0_DOMAIN  : "hls.au.auth0.com"
-      AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
-      AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+      # AUTH0_DOMAIN  : "https://hls.au.auth0.com"
+      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
 
       # GENERIC_CLIENT_ID: "coursepad.admin"
       # GENERIC_CLIENT_SECRET: "IEvgIBADANLgkqhkiG9w0BAQEFAASCB"
