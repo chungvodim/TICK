@@ -44,15 +44,15 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: loudml/chronograf
+    image: chronograf
     environment:
       INFLUXDB_URL: http://influxdb:8086
-      LOUDML_URL: http://loudml:8077
+      # LOUDML_URL: http://loudml:8077
       KAPACITOR_URL: http://kapacitor:9092
       # RESOURCES_PATH: "/usr/share/chronograf/resources"
 
-      PUBLIC_URL : "http://localhost:8088"
-      TOKEN_SECRET : "Super5uperUdn3verGu355!"
+      # PUBLIC_URL : "http://localhost:8088"
+      # TOKEN_SECRET : "Super5uperUdn3verGu355!"
 
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
