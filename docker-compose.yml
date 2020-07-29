@@ -44,7 +44,7 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: chronograf
+    image: loudml/chronograf
     environment:
       INFLUXDB_URL: http://influxdb:8086
       LOUDML_URL: http://loudml:8077
