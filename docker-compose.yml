@@ -2,30 +2,18 @@ version: '3'
 services:
   influxdb:
     container_name: influxdb
-    # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
-    build:
-      context: ./images/influxdb/
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        INFLUXDB_TAG: ${INFLUXDB_TAG}
-    image: "influxdb"
+    image: influxdb
     volumes:
-      # Mount for influxdb data directory
+      - var_influxdb
       - ./influxdb/data:/var/lib/influxdb
-      # Mount for influxdb configuration
       - ./influxdb/config/:/etc/influxdb/
     ports:
-      # The API for InfluxDB is served on port 8086
       - "8086:8086"
-      - "8082:8082"
-      # UDP Port
-      - "8089:8089/udp"
     networks:
       - infra-network
 
   telegraf:
     container_name: telegraf
-    # Full tag list: https://hub.docker.com/r/library/telegraf/tags/
     build:
       context: ./images/telegraf/
       dockerfile: ./${TYPE}/Dockerfile
@@ -34,53 +22,33 @@ services:
     image: "telegraf"
     environment:
       HOSTNAME: "telegraf-getting-started"
-    # Telegraf requires network access to InfluxDB
-    # links:
-    #   - influxdb
     networks:
       - infra-network
     volumes:
-      # Mount for telegraf configuration
       - ./telegraf/:/etc/telegraf/
-      # Mount for Docker API access
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - influxdb
 
   kapacitor:
     container_name: kapacitor
-  # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
-    build:
-      context: ./images/kapacitor/
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        KAPACITOR_TAG: ${KAPACITOR_TAG}
-    image: "kapacitor"
+    image: kapacitor
     volumes:
-      # Mount for kapacitor data directory
+      - var_kapacitor
       - ./kapacitor/data/:/var/lib/kapacitor
-      # Mount for kapacitor configuration
       - ./kapacitor/config/:/etc/kapacitor/
-    # Kapacitor requires network access to Influxdb
-    # links:
-    #   - influxdb
     networks:
       - infra-network
     ports:
-      # The API for Kapacitor is served on port 9092
       - "9092:9092"
 
   chronograf:
     container_name: chronograf
-    # # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
-    # build:
-    #   context: ./images/chronograf
-    #   dockerfile: ./${TYPE}/Dockerfile
-    #   args:
-    #     CHRONOGRAF_TAG: ${CHRONOGRAF_TAG}
-    # image: "chrono_config"
     image: loudml/chronograf
     environment:
+      INFLUXDB_URL: http://influxdb:8086
+      LOUDML_URL: http://loudml:8077
+      KAPACITOR_URL: http://kapacitor:9092
       # RESOURCES_PATH: "/usr/share/chronograf/resources"
 
       PUBLIC_URL : "http://localhost:8088"
@@ -108,6 +76,7 @@ services:
     #   LOUDML_URL: http://loudml:8077
     #   KAPACITOR_URL: http://kapacitor:9092
     volumes:
+      - var_chronograf
       # Mount for chronograf database
       - ./chronograf/data/:/var/lib/chronograf/
     # links:
@@ -125,24 +94,10 @@ services:
       - telegraf
       # - loudml
 
-  # documentation:
-  #   build:
-  #     context: ./documentation
-  #   ports:
-  #     - "3010:3000"
-
-  # loudml:
-  #   container_name: loudml
-  #   image: loudml/loudml:1.6.0
-  #   volumes:
-  #     - ./loudml/var/lib:/var/lib/loudml
-  #     - ./loudml/etc/config.yml:/etc/loudml/config.yml:ro
-  #     - ./loudml/etc/model.json:/etc/loudml/model.json:ro
-  #     - ./loudml/var:/var/loudml
-  #   ports:
-  #     - "8077:8077"
-  #   depends_on:
-  #     - influxdb
+volumes:
+  var_chronograf:
+  var_kapacitor:
+  var_influxdb:
 
 networks:
   infra-network:
