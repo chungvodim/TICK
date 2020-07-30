@@ -14,12 +14,7 @@ services:
 
   telegraf:
     container_name: telegraf
-    build:
-      context: ./images/telegraf/
-      dockerfile: ./${TYPE}/Dockerfile
-      args:
-        TELEGRAF_TAG: ${TELEGRAF_TAG}
-    image: "telegraf"
+    image: telegraf
     environment:
       HOSTNAME: "telegraf-getting-started"
     networks:
