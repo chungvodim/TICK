@@ -5,8 +5,8 @@ services:
     image: influxdb
     volumes:
       - var_influxdb
-      - ./influxdb/data:/var/lib/influxdb
-      - ./influxdb/config/:/etc/influxdb/
+      # - ./influxdb/data:/var/lib/influxdb
+      # - ./influxdb/config/:/etc/influxdb/
     ports:
       - "8086:8086"
     networks:
@@ -20,8 +20,7 @@ services:
     networks:
       - infra-network
     volumes:
-      - ./telegraf/:/etc/telegraf/
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - influxdb
 
