@@ -38,30 +38,30 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: chronograf
+    image: loudml/chronograf
     environment:
       INFLUXDB_URL: http://influxdb:8086
       # LOUDML_URL: http://loudml:8077
       KAPACITOR_URL: http://kapacitor:9092
       # RESOURCES_PATH: "/usr/share/chronograf/resources"
 
-      # PUBLIC_URL : "http://localhost:8088"
-      # TOKEN_SECRET : "Super5uperUdn3verGu355!"
+      PUBLIC_URL : "http://localhost:8088"
+      TOKEN_SECRET : "Super5uperUdn3verGu355!"
 
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
 
-      # AUTH0_DOMAIN  : "https://hls.au.auth0.com"
-      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
-      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+      AUTH0_DOMAIN  : "https://hls.au.auth0.com"
+      AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+      AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
 
-      # GENERIC_CLIENT_ID: "coursepad.admin"
+      # GENERIC_CLIENT_ID: "chronograf"
       # GENERIC_CLIENT_SECRET: "IEvgIBADANLgkqhkiG9w0BAQEFAASCB"
-      # GENERIC_AUTH_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/authorize"
-      # GENERIC_TOKEN_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/token"
+      # GENERIC_AUTH_URL: "http://localhost:53414/connect/authorize"
+      # GENERIC_TOKEN_URL: "http://localhost:53414/connect/token"
       # USE_ID_TOKEN: "true"
-      # JWKS_URL: "https://systemtest-idm-web.csc.cxs.cloud/.well-known/openid-configuration"
-      # GENERIC_API_URL: "https://systemtest-idm-web.csc.cxs.cloud/connect/userinfo"
+      # JWKS_URL: "http://localhost:53414/.well-known/openid-configuration"
+      # GENERIC_API_URL: "http://localhost:53414/connect/userinfo"
       # GENERIC_API_KEY: "upn"
       # GENERIC_SCOPES: "openid"
 
