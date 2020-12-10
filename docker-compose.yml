@@ -2,7 +2,8 @@ version: '3'
 services:
   influxdb:
     container_name: influxdb
-    image: influxdb
+    restart: always
+    image: influxdb:latest
     volumes:
       - var_influxdb
       # - ./influxdb/data:/var/lib/influxdb
@@ -14,7 +15,8 @@ services:
 
   telegraf:
     container_name: telegraf
-    image: telegraf
+    restart: always
+    image: telegraf:latest
     environment:
       HOSTNAME: "telegraf-getting-started"
     networks:
@@ -26,6 +28,7 @@ services:
 
   kapacitor:
     container_name: kapacitor
+    restart: always
     image: kapacitor
     volumes:
       - var_kapacitor
@@ -38,22 +41,23 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: loudml/chronograf
+    restart: always
+    image: chronograf:latest
     environment:
       INFLUXDB_URL: http://influxdb:8086
       # LOUDML_URL: http://loudml:8077
       KAPACITOR_URL: http://kapacitor:9092
       # RESOURCES_PATH: "/usr/share/chronograf/resources"
 
-      PUBLIC_URL : "http://203.205.51.89:8088"
-      TOKEN_SECRET : "Super5uperUdn3verGu355!"
+      # PUBLIC_URL : "http://localhost:8888"
+      # TOKEN_SECRET : "Super5uperUdn3verGu355!"
 
       # GOOGLE_CLIENT_ID : "831405758394-hd2ji8h8a196tf0fi0g1c7urjsbb2sr7.apps.googleusercontent.com"
       # GOOGLE_CLIENT_SECRET : "vWlEzeYpN_3FEe9ChuUCzwhr"
 
-      AUTH0_DOMAIN  : "https://hls.au.auth0.com"
-      AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
-      AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
+      # AUTH0_DOMAIN  : "https://hls.au.auth0.com"
+      # AUTH0_CLIENT_ID : "mJpnXc0dXR9GZhas7QdhOZnLuZJekKoG"
+      # AUTH0_CLIENT_SECRET : "OjLOKt3uz61_ekShAXEcwlPti96-a14mS4pYle9Of5YQKDtn--QcWwLjcXs6nd9D"
 
       # GENERIC_CLIENT_ID: "chronograf"
       # GENERIC_CLIENT_SECRET: "IEvgIBADANLgkqhkiG9w0BAQEFAASCB"
@@ -64,11 +68,6 @@ services:
       # GENERIC_API_URL: "http://localhost:53414/connect/userinfo"
       # GENERIC_API_KEY: "upn"
       # GENERIC_SCOPES: "openid"
-
-    # environment:
-    #   INFLUXDB_URL: http://influxdb:8086
-    #   LOUDML_URL: http://loudml:8077
-    #   KAPACITOR_URL: http://kapacitor:9092
     volumes:
       # - var_chronograf
       # Mount for chronograf database
@@ -81,13 +80,25 @@ services:
       - infra-network
     ports:
       # The WebUI for Chronograf is served on port 8888
-      - "8088:8888"
+      - "8888:8888"
     depends_on:
       - kapacitor
       - influxdb
       - telegraf
       # - loudml
-
+  grafana:
+    container_name: grafana
+    restart: always
+    image: grafana/grafana
+    networks:
+      - infra-network
+    ports:
+      - "3000:3000"
+    volumes:
+      # - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./grafana/grafana-storage:/var/lib/grafana
+    depends_on:
+      - influxdb
 volumes:
   var_chronograf:
   var_kapacitor:
