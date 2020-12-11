@@ -95,7 +95,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
       - ./grafana/grafana-storage:/var/lib/grafana
     depends_on:
       - influxdb
