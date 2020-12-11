@@ -7,11 +7,6 @@ services:
       - 18083:18083
       - 1883:1883
       - 8083:8083
-    environment:
-    - "EMQX_NAME=emqx"
-    - "EMQX_HOST=node.emqx.io"
-    - "EMQX_CLUSTER__DISCOVERY=static"
-    - "EMQX_CLUSTER__STATIC__SEEDS=emqx@node.emqx.io"
     networks:
       - infra-network
   influxdb:
