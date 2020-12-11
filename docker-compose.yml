@@ -104,14 +104,15 @@ services:
     ports:
       - "3000:3000"
     volumes:
+      - var_grafana
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
-      - ./grafana/grafana-storage:/var/lib/grafana
     depends_on:
       - influxdb
 volumes:
   var_chronograf:
   var_kapacitor:
   var_influxdb:
+  var_grafana:
 
 networks:
   infra-network:
