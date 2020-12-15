@@ -6,7 +6,7 @@ services:
     ports:
       - 18083:18083
       - 1883:1883
-      - 8083:8083
+      - 8084:8083
     networks:
       - infra-network
   influxdb:
