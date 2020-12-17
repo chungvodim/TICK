@@ -2,6 +2,7 @@ version: '3'
 services:
   emqx:
     container_name: emqx
+    restart: always
     image: emqx/emqx:latest
     ports:
       - 18083:18083
